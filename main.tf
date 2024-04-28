@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MPL-2.0
 
 # This configuration deploys infrastructure on AWS for TechSolutions Inc.
-# Resources include EC2 instances, Load Balancer, RDS database, and security configurations.
+# Resources include EC2 instances and security configurations.
 
 
 # SIMULATED INFRASTRUCTURE
@@ -15,7 +15,7 @@ provider "aws" {
 
 # VPC to host TechSolutions Inc resources
 resource "aws_vpc" "primary_vpc" {
-  cidr_block = "10.0.0.0/16" # Adjust CIDR block as needed
+  cidr_block = "10.0.0.0/16"
 
   tags = {
     Name = "Primary VPC"
@@ -36,8 +36,8 @@ resource "aws_subnet" "primary_subnet" {
 # EC2 instances
 resource "aws_instance" "servers" {
   count         = 2
-  ami           = "ami-0827b6c5b977c020e"  # Replace with a valid AMI ID
-  instance_type = "t2.micro"               # Adjust instance type as needed
+  ami           = "ami-0827b6c5b977c020e"
+  instance_type = "t2.micro" 
   subnet_id     = aws_subnet.primary_subnet.id
 
   tags = {
